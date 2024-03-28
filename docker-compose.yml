@@ -1,0 +1,44 @@
+version: '3'
+services:
+  wordpress:
+    container_name: mariadb 
+    image: mariadb-img
+    build:
+      context: mariadb/
+      dockerfile: Dockerfile
+    depends_on:
+      - mariadb
+    networks:
+      - network
+    restart: always
+services:
+  wordpress:
+    container_name: wordpress
+    image: wordpress-img
+    build:
+      context: wordpress/
+      dockerfile: Dockerfile
+    depends_on:
+      - mariadb
+    networks:
+      - network
+    restart: always
+services:
+  wordpress:
+    container_name: nginx 
+    image: nginx-img
+    build:
+      context: nginx/
+      dockerfile: Dockerfile
+    ports:
+      - 443:443
+    depends_on:
+      - wordpress 
+    networks:
+      - network
+    restart: always
+
+networks:
+  network:
+    name: inception-network
+    driver: bridge
