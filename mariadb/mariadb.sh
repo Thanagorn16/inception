@@ -14,3 +14,6 @@ then
 	mariadb -e "FLUSH PRIVILEGES;"
 fi
 
+service mariadb stop
+
+exec "$@"

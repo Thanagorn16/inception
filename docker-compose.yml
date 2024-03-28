@@ -1,17 +1,14 @@
 version: '3'
 services:
-  wordpress:
+  mariadb:
     container_name: mariadb 
     image: mariadb-img
     build:
       context: mariadb/
       dockerfile: Dockerfile
-    depends_on:
-      - mariadb
     networks:
       - network
     restart: always
-services:
   wordpress:
     container_name: wordpress
     image: wordpress-img
@@ -23,8 +20,7 @@ services:
     networks:
       - network
     restart: always
-services:
-  wordpress:
+  nginx:
     container_name: nginx 
     image: nginx-img
     build:
