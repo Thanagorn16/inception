@@ -1,4 +1,5 @@
 VOLUME_DIR = /home/ubuntu/data
+ENV_DIR = ./srcs/.env
 
 all: create up
 
@@ -7,21 +8,21 @@ create:
 	sudo mkdir -p ${VOLUME_DIR}/mariadb
 
 up:
-	docker compose -f ./docker-compose.yml up -d --build
+	docker compose -f ./srcs/docker-compose.yml --env-file ${ENV_DIR} up -d --build
 
 down:
-	docker compose -f ./docker-compose.yml down
+	docker compose -f ./srcs/docker-compose.yml --env-file ${ENV_DIR} down
 
 start:
-	docker compose -f ./docker-compose.yml start
+	docker compose -f ./srcs/docker-compose.yml start
 
 stop:
-	docker compose -f ./docker-compose.yml stop
+	docker compose -f ./srcs/docker-compose.yml stop
 
 re: down up
 
 clean:
-	docker compose -f ./docker-compose.yml down --rmi all --volumes
+	docker compose -f ./srcs/docker-compose.yml --env-file ${ENV_DIR} down --rmi all --volumes
 
 fclean:
 	docker stop $$(docker ps -qa) 

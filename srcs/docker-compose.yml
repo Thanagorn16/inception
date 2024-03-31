@@ -2,33 +2,37 @@ version: '3'
 services:
   mariadb:
     container_name: mariadb 
-    image: mariadb-img
+    image: mariadb
     build:
-      context: mariadb/
+      context: requirements/mariadb
       dockerfile: Dockerfile
     networks:
       - network
+    env_file:
+      - .env
     volumes:
       - mariadb:/var/lib/mysql
     restart: always
   wordpress:
     container_name: wordpress
-    image: wordpress-img
+    image: wordpress
     build:
-      context: wordpress/
+      context: requirements/wordpress
       dockerfile: Dockerfile
     depends_on:
       - mariadb
     networks:
       - network
+    env_file:
+      - .env
     volumes:
       - wordpress:/var/www/html
     restart: always
   nginx:
     container_name: nginx 
-    image: nginx-img
+    image: nginx
     build:
-      context: nginx/
+      context: requirements/nginx
       dockerfile: Dockerfile
     ports:
       - 443:443
@@ -36,6 +40,8 @@ services:
       - wordpress 
     networks:
       - network
+    env_file:
+      - .env
     volumes:
       - wordpress:/var/www/html
     restart: always
