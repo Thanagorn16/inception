@@ -23,13 +23,13 @@ then
 	#	--dbhost=localhost
 	#echo ">>>>>>>>>here<<<<<<<<<<<"
 
-	sleep 10	
-#	wp core install --allow-root \
-#		--url=truangsi.42.fr \
-#		--title=myWordpress \
-#		--admin_user=truangsi \
-#		--admin_password=1234 \
-#		--admin_email=thanagorn1116@gmail.com
+	#sleep 10	
+	wp core install --allow-root \
+		--url=truangsi.42.fr \
+		--title=myWordpress \
+		--admin_user=truangsi \
+		--admin_password=1234 \
+		--admin_email=thanagorn1116@gmail.com
 
 fi
 exec "$@"
