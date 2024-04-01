@@ -1,6 +1,6 @@
 FROM	debian:bullseye
 
-RUN	apt update && apt upgrade && apt install vim -y
+RUN	apt update && apt install vim -y
 
 # php
 RUN	apt install php php-mysql php-fpm -y
@@ -11,14 +11,14 @@ RUN	wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
 	mkdir -p /var/www/html && \
 	tar -xzvf /tmp/wordpress.tar.gz -C /var/www/html && \
 	chown -R www-data.www-data /var/www/html/wordpress && \
-	chmod -R 755 /var/www/html/wordpress
+	chmod -R 775 /var/www/html/wordpress
 
 #install wp-cli
 RUN	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp && \	
     	chmod +x /usr/local/bin/wp
-COPY	./www.conf ./etc/php/7.4/fpm/pool.d/
-COPY	./wp_config.sh /usr/local/bin/
+COPY	./conf/www.conf ./etc/php/7.4/fpm/pool.d/
+COPY	./tools/wp_config.sh /usr/local/bin/
 RUN	chmod +x /usr/local/bin/wp_config.sh
 RUN	service php7.4-fpm start
 

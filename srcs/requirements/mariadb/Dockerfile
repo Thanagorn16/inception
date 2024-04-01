@@ -1,12 +1,14 @@
 FROM	debian:bullseye
 
-RUN	apt update && apt upgrade && apt install vim -y
+RUN	apt update
 RUN	apt install mariadb-server mariadb-client -y
 
-COPY	./50-server.cnf /etc/mysql/mariadb.conf.d/
-COPY	./mariadb.sh /usr/local/bin/
+COPY	./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+COPY	./tools/mariadb.sh /usr/local/bin/
 
 RUN	chmod +x /usr/local/bin/mariadb.sh
+RUN	./usr/local/bin/mariadb.sh
+RUN	chown -R mysql:mysql /var/run/mysqld
 
 ENTRYPOINT	["/usr/local/bin/mariadb.sh"]
 

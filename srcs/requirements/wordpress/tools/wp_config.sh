@@ -12,6 +12,7 @@ then
 	sed -i "s/password_here/${DB_PASSWORD}/g" wp-config.php
 	sed -i "s/localhost/${DB_HOSTNAME}/g" wp-config.php
 
+	sleep 10
 	# create admin user
 	wp core install --allow-root \
 		--url=${DOMAIN_NAME} \
@@ -29,4 +30,6 @@ then
 		--allow-root
 
 fi
+
+chmod -R 777 /var/www/html/   
 exec "$@"

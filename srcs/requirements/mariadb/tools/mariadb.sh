@@ -16,4 +16,6 @@ fi
 
 service mariadb stop
 
+chmod 777 /var/lib/mysql/
+
 exec "$@"

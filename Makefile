@@ -1,11 +1,11 @@
-VOLUME_DIR = /home/ubuntu/data
+VOLUME_DIR = home/ubuntu
 ENV_DIR = ./srcs/.env
 
 all: create up
 
 create:
-	sudo mkdir -p ${VOLUME_DIR}/wordpress
-	sudo mkdir -p ${VOLUME_DIR}/mariadb
+	mkdir -p ${HOME}/data/mariadb
+	mkdir -p ${HOME}/data/wordpress
 
 up:
 	docker compose -f ./srcs/docker-compose.yml --env-file ${ENV_DIR} up -d --build
@@ -29,5 +29,6 @@ fclean:
 	docker system prune --all --force
 	docker network prune --force
 	docker volume prune --force
+	rm -rf ${HOME}/data
 
 .PHONY : all create up down start stop re clean fclean

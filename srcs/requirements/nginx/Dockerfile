@@ -1,9 +1,9 @@
 FROM	debian:bullseye
 
-RUN	apt update && apt upgrade && apt install vim -y
+RUN	apt update && apt install vim -y
 # nginx
 RUN	apt install nginx openssl -y
-COPY	./my.conf ./etc/nginx/conf.d/
+COPY	./conf/my.conf ./etc/nginx/conf.d/
 RUN	mkdir /etc/nginx/ssl && \
 	openssl req -x509 -out /etc/nginx/ssl/ca.crt \ 
 	-keyout /etc/nginx/ssl/private.key -nodes \ 

@@ -47,18 +47,18 @@ services:
     restart: always
 
 volumes:
-  wordpress:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device:  /home/ubuntu/data/wordpress
-  mariadb:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/ubuntu/data/mariadb
+    wordpress:
+        driver: local
+        driver_opts:
+                o: bind
+                type: none
+                device: ${HOME}/data/wordpress
+    mariadb:
+        driver: local
+        driver_opts:
+                o: bind
+                type: none
+                device: ${HOME}/data/mariadb
 
 networks:
   network:
